@@ -1,0 +1,9 @@
+# Virtualenv
+venv/
+
+# DB
+*.sqlite3
+
+# Pycache
+*.pyc
+*.pyo
