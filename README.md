@@ -1,5 +1,5 @@
 # Soteria
-> Heart of the best disaster prevention tools
+> Heart of the best disaster prevention tool
 
 ## Setup
 
