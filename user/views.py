@@ -11,7 +11,7 @@ class RegisterView(View):
     """Registeration as view
     """
 
-    template_name = 'forms/register.html'
+    template_name = 'user/register.html'
     form_class = RegisterForm
     model_class = User
 
@@ -81,7 +81,7 @@ class LoginView(View):
     """Login as view
     """
 
-    template_name = 'forms/login.html'
+    template_name = 'user/login.html'
     form_name = LoginForm
     model_class = User
 
@@ -128,3 +128,19 @@ def logout_view(request):
 
     logout(request)
     return redirect('/user/login/')
+
+
+class ProfileView(View):
+    """Profile page as view
+    """
+
+    template_name = 'user/profile.html'
+    model_class = User
+
+    def get(self, request, username):
+        try:
+            user = self.model_class.objects.get(username=username)
+        except User.DoesNotExist:
+            return render(request, '404.html')
+
+        return render(request, self.template_name, {'user': user})
