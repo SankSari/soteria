@@ -134,7 +134,7 @@ class LoginView(View):
         return
 
 
-def logoutView(request):
+def logout_view(request):
     """Logour current user if any
     """
 
