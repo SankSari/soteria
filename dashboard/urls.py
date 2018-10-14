@@ -1,9 +1,9 @@
 from django.urls import path
 from django.shortcuts import render
-from .views import index
+from .views import IndexView
 
 app_name = 'dashboard'
 
 urlpatterns = [
-    path('', index),
+    path('', IndexView.as_view()),
 ]
