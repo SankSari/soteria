@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
+from utils.decorators import no_user_redirect_method
 from .forms import RegisterForm, LoginForm
 from .models import User
 
@@ -14,18 +15,12 @@ class RegisterView(View):
     form_class = RegisterForm
     model_class = User
 
+    @no_user_redirect_method
     def get(self, request):
-        # Redirect if user is already logged in
-        if request.user.is_authenticated:
-            return redirect('/')
-
         return render(request, self.template_name)
 
+    @no_user_redirect_method
     def post(self, request):
-        # Redirect if user is already logged in
-        if request.user.is_authenticated:
-            return redirect('/')
-
         form = self.form_class(request.POST)
         reg_err = None
 
@@ -90,18 +85,12 @@ class LoginView(View):
     form_name = LoginForm
     model_class = User
 
+    @no_user_redirect_method
     def get(self, request):
-        # Redirect if user is already logged in
-        if request.user.is_authenticated:
-            return redirect('/')
-
         return render(request, self.template_name)
 
+    @no_user_redirect_method
     def post(self, request):
-        # Redirect if user is already logged in
-        if request.user.is_authenticated:
-            return redirect('/')
-
         form = LoginForm(request.POST)
         auth_err = None
 
