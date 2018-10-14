@@ -1,0 +1,17 @@
+<h1>Login Form</h1>
+<form method="POST" action="{% url 'user:login' %}">
+    {% csrf_token %}
+    <p><label>Username <input type="text" name="username" /></label></p>
+    <p><label>Password <input type="password" name="password" /></label></p>
+    <p><button type="submit">Login to Soteria</button></p>
+</form>
+{% if form.errors %}
+<ol>
+    {% for key, value in form.errors.items %}
+    <li><strong>{{ key }}:</strong> {{ value }}</li>
+    {% endfor %}
+</ol>
+{% endif %}
+{% if auth_err %}
+<p><strong>{{ auth_err }}</strong></p>
+{% endif %}

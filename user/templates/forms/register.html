@@ -1,0 +1,22 @@
+<h1>Registeration Form</h1>
+<form method="POST" action="{% url 'user:register' %}">
+    {% csrf_token %}
+    <p><label>Username <input type="text" name="username" /></label></p>
+    <p><label>Name <input type="text" name="name" /></label></p>
+    <p><label>Email <input type="email" name="email" /></label></p>
+    <p><label>Phone Number <input type="number" name="phone_number" /></label></p>
+    <p><label>Volunteer? <input type="checkbox" name="volunteer" /></label></p>
+    <p><label>Password <input type="password" name="password1" /></label></p>
+    <p><label>Retype Password <input type="password" name="password2" /></label></p>
+    <p><button type="submit">Create new account</button></p>
+</form>
+{% if form.errors %}
+<ol>
+    {% for key, value in form.errors.items %}
+    <li><strong>{{ key }}:</strong> {{ value }}</li>
+    {% endfor %}
+</ol>
+{% endif %}
+{% if reg_err %}
+<p><strong>{{ reg_err }}</strong></p>
+{% endif %}
