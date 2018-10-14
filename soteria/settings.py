@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 # Add apps here
 INSTALLED_APPS += [
     'user',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
