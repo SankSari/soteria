@@ -30,15 +30,15 @@ class RegisterView(View):
         reg_err = None
 
         if form.is_valid():
-            reg_err = self.form_valid(form)
+            reg_err = self.form_valid(form, request)
 
             if reg_err is None:
                 return redirect('/user/login/')
 
-        self.form_invalid(form)
+        self.form_invalid(form, request)
         return render(request, self.template_name, {'form': form, 'reg_err': reg_err})
 
-    def form_valid(self, form, request=None):
+    def form_valid(self, form, request):
         """Executes when the form is valid
         """
         data = form.data
@@ -63,7 +63,7 @@ class RegisterView(View):
             'phone_number'), volunteer, password, first_name, last_name)
         return reg_err
 
-    def form_invalid(self, form, request=None):
+    def form_invalid(self, form, request):
         """Executes when the form is invalid
         """
         return
@@ -106,29 +106,28 @@ class LoginView(View):
         auth_err = None
 
         if form.is_valid():
-            auth_err = self.form_valid(form)
+            auth_err = self.form_valid(form, request)
 
-            if auth_err is not None:
+            if auth_err is None:
                 return redirect('/')
 
-        self.form_invalid(form)
+        self.form_invalid(form, request)
         return render(request, self.template_name, {'form': form, 'auth_err': auth_err})
 
-    def form_valid(self, form, request=None):
+    def form_valid(self, form, request):
         """Executes when the form is valid
         """
         data = form.data
-        password = make_password(data.get('password'))
 
         user = authenticate(request=request, username=data.get(
-            'username'), password=password)
+            'username'), password=data.get('password'))
         if user is None:
             return 'Incorrect Username or Password'
 
         login(request, user)
         return
 
-    def form_invalid(self, form, request=None):
+    def form_invalid(self, form, request):
         """Executes when the form is invalid
         """
         return
