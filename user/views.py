@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
-from utils.decorators import no_user_redirect_method
+from utils.decorators import logged_in_redirect_method
 from .forms import RegisterForm, LoginForm
 from .models import User
 
@@ -15,11 +15,11 @@ class RegisterView(View):
     form_class = RegisterForm
     model_class = User
 
-    @no_user_redirect_method
+    @logged_in_redirect_method
     def get(self, request):
         return render(request, self.template_name)
 
-    @no_user_redirect_method
+    @logged_in_redirect_method
     def post(self, request):
         form = self.form_class(request.POST)
         reg_err = None
@@ -85,11 +85,11 @@ class LoginView(View):
     form_name = LoginForm
     model_class = User
 
-    @no_user_redirect_method
+    @logged_in_redirect_method
     def get(self, request):
         return render(request, self.template_name)
 
-    @no_user_redirect_method
+    @logged_in_redirect_method
     def post(self, request):
         form = LoginForm(request.POST)
         auth_err = None
