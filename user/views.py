@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
@@ -138,9 +138,5 @@ class ProfileView(View):
     model_class = User
 
     def get(self, request, username):
-        try:
-            user = self.model_class.objects.get(username=username)
-        except User.DoesNotExist:
-            return render(request, '404.html')
-
+        user = get_object_or_404(User, username=username)
         return render(request, self.template_name, {'user': user})
