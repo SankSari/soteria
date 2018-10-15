@@ -22,13 +22,24 @@
                 <a class="form-logo" href="{% url 'dashboard:index' %}">Soteria</a>
                 <div class="form-heading">{% block heading %}{% endblock %}</div>
             </div>
+
             {% if form.errors %}
             {% for key, value in form.errors.items %}
-            <p><strong>{{ key }}:</strong> {{ value }}</p>
+            <div class="err-box">
+                {% if key != '__all__' %}
+                <span class="key">{{ key }}</span>
+                {% endif %}
+                {{ value }}
+            </div>
             {% endfor %}
             {% endif %}
-            {% block err %}
-            {% endblock %}
+
+            {% if err %}
+            <div class="err-box">
+                {{ err }}
+            </div>
+            {% endif %}
+
             {% block form %}
             {% endblock %}
             <div class="bottom-link-box">{% block bottomLink %}{% endblock %}</div>

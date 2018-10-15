@@ -22,16 +22,16 @@ class RegisterView(View):
     @logged_in_redirect_method
     def post(self, request):
         form = self.form_class(request.POST)
-        reg_err = None
+        err = None
 
         if form.is_valid():
-            reg_err = self.form_valid(form, request)
+            err = self.form_valid(form, request)
 
-            if reg_err is None:
+            if err is None:
                 return redirect('/user/login/')
 
         self.form_invalid(form, request)
-        return render(request, self.template_name, {'form': form, 'reg_err': reg_err})
+        return render(request, self.template_name, {'form': form, 'err': err})
 
     def form_valid(self, form, request):
         """Executes when the form is valid
@@ -54,9 +54,9 @@ class RegisterView(View):
         if len(names) > 1:
             last_name = ' '.join(names[1:])
 
-        reg_err = self.register(data.get('username'), data.get('email'), data.get(
+        err = self.register(data.get('username'), data.get('email'), data.get(
             'phone_number'), volunteer, password, first_name, last_name)
-        return reg_err
+        return err
 
     def form_invalid(self, form, request):
         """Executes when the form is invalid
@@ -92,16 +92,16 @@ class LoginView(View):
     @logged_in_redirect_method
     def post(self, request):
         form = LoginForm(request.POST)
-        auth_err = None
+        err = None
 
         if form.is_valid():
-            auth_err = self.form_valid(form, request)
+            err = self.form_valid(form, request)
 
-            if auth_err is None:
+            if err is None:
                 return redirect('/')
 
         self.form_invalid(form, request)
-        return render(request, self.template_name, {'form': form, 'auth_err': auth_err})
+        return render(request, self.template_name, {'form': form, 'err': err})
 
     def form_valid(self, form, request):
         """Executes when the form is valid
