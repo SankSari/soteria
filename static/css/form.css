@@ -1,0 +1,68 @@
+.outer-flex {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.main-form-box {
+    width: 450px;
+    padding: 50px;
+    height: auto;
+    background: #FFF;
+    box-shadow: 0 1px 2px #999;
+}
+
+.heading-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #555;
+    text-decoration: none;
+    display: block;
+}
+
+.form-heading {
+    font-size: 20px;
+    color: #777;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-field input {
+    width: 100%;
+    display: block;
+    padding: 10px 12px;
+    font-size: 16px;
+}
+
+.form-submit-button {
+    padding: 13px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.bottom-link-box {
+    margin-top: 30px;
+}
+
+.checkbox-label {
+    margin-bottom: 20px;
+    display: block;
+}

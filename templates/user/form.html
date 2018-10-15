@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}{% endblock %} - Soteria</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/form.css' %}" />
+
+</head>
+
+<body>
+    <div class="outer-flex">
+        <div class="main-form-box">
+            <div class="heading-flex">
+                <a class="form-logo" href="{% url 'dashboard:index' %}">Soteria</a>
+                <div class="form-heading">{% block heading %}{% endblock %}</div>
+            </div>
+            {% if form.errors %}
+            {% for key, value in form.errors.items %}
+            <p><strong>{{ key }}:</strong> {{ value }}</p>
+            {% endfor %}
+            {% endif %}
+            {% block err %}
+            {% endblock %}
+            {% block form %}
+            {% endblock %}
+            <div class="bottom-link-box">{% block bottomLink %}{% endblock %}</div>
+        </div>
+    </div>
+</body>
+
+</html>

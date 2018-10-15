@@ -1,17 +1,29 @@
-<h1>Login Form</h1>
+{% extends 'user/form.html' %}
+
+{% block title %}Login{% endblock %}
+{% block heading %}Login{% endblock %}
+
+{% block err %}
+{% if auth_err %}
+<p>{{ auth_err }}</p>
+{% endif %}
+{% endblock %}
+
+{% block form %}
 <form method="POST" action="{% url 'user:login' %}">
     {% csrf_token %}
-    <p><label>Username <input type="text" name="username" /></label></p>
-    <p><label>Password <input type="password" name="password" /></label></p>
-    <p><button type="submit">Login to Soteria</button></p>
+    <div class="form-field">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" />
+    </div>
+    <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+    </div>
+    <button class="form-submit-button">Login</button>
 </form>
-{% if form.errors %}
-<ol>
-    {% for key, value in form.errors.items %}
-    <li><strong>{{ key }}:</strong> {{ value }}</li>
-    {% endfor %}
-</ol>
-{% endif %}
-{% if auth_err %}
-<p><strong>{{ auth_err }}</strong></p>
-{% endif %}
+{% endblock %}
+
+{% block bottomLink %}
+Don't have an account? <a href="{% url 'user:register' %}">Register</a>
+{% endblock %}
