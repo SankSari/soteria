@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     'user',
     'dashboard',
+    'disaster',
 ]
 
 MIDDLEWARE = [

@@ -42,14 +42,14 @@ label {
     cursor: pointer;
 }
 
-button {
+button[type="submit"] {
     background: #307EAB;
     color: #FFF;
     font-weight: bold;
     cursor: pointer;
 }
 
-button:hover, button:focus {
+button[type="submit"]:hover, button[type="submit"]:focus {
     background: #2A6E96;
 }
 

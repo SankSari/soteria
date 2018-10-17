@@ -1,0 +1,101 @@
+header {
+    width: 100%;
+    height: 56px;
+    background: #333;
+    display: flex;
+    box-shadow: 0 1px 2px #777;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #FFF;
+    padding: 0 40px;
+}
+
+#left-item, #right-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #FFF;
+    display: inline-block;
+    margin-right: 40px;
+}
+
+.logo:hover {
+    color: #EEE;
+}
+
+.search-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.what-to-do {
+    font-size: 12px;
+    padding: 0 10px 0 0;
+    text-transform: uppercase;
+}
+
+.q {
+    height: 56px;
+    width: 344px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0 13px;
+    font-size: 16px;
+    color: #FFF;
+    border: 0px;
+}
+
+.q:focus {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.q-submit {
+    height: 56px;
+    width: 56px;
+}
+
+.q-icon {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    border: 2px solid #EEE;
+    position: relative;
+    background: transparent;
+    transform: translate(18px, -2px);
+}
+.q-icon:after {
+    content: '';
+    height: 2px;
+    width: 7px;
+    background: #FFF;
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    transform: rotate(45deg);
+}
+
+.header-link {
+    color: #FFF;
+    padding: 6px 10px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #EEE;
+    background: rgba(255, 255, 255, 0.05);
+    display: inline-block;
+    margin-left: 12px;
+}
+
+.header-link:hover {
+    color: #EEE;
+    background: rgba(255, 255, 255, 0.1);
+}

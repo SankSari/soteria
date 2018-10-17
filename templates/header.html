@@ -1,5 +1,27 @@
 <!-- Requires header.css -->
 
 <header>
-    HEADER
+    <div id="left-item">
+        <a href="{% url 'dashboard:index' %}" class="logo">
+            Soteria
+        </a>
+        <form class="search-box" method="GET" action="{% url 'disaster:search' %}">
+            <span class="what-to-do">
+                What Should I Do During
+            </span>
+            <input type="search" class="q" name="q" placeholder="Earthquake, Tsunami..." required autocomplete="off" />
+            <button type="submit" class="q-submit">
+                <div class="q-icon"></div>
+            </button>
+        </form>
+    </div>
+    <div id="right-item">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'user:profile' request.user.username %}" class="header-link">{{ request.user.first_name }}{% if request.user.last_name != '' %} {{ request.user.last_name}}{% endif %}</a>
+        <a href="{% url 'user:logout' %}" class="header-link">Logout</a>
+        {% else %}
+        <a href="{% url 'user:login' %}" class="header-link">Login</a>
+        <a href="{% url 'user:register' %}" class="header-link">Register</a>
+        {% endif %}
+    </div>
 </header>
