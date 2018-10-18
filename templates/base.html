@@ -20,7 +20,9 @@
 
 <body>
     {% include 'header.html' %}
-    {% block content %}{% endblock %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 
     {% block js_body %}{% endblock %}
 </body>

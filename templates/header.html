@@ -17,7 +17,8 @@
     </div>
     <div id="right-item">
         {% if request.user.is_authenticated %}
-        <a href="{% url 'user:profile' request.user.username %}" class="header-link">{{ request.user.first_name }}{% if request.user.last_name != '' %} {{ request.user.last_name}}{% endif %}</a>
+        <a href="{% url 'user:profile' request.user.username %}" class="header-link">{{ request.user.first_name }}
+            {% if request.user.last_name != '' %} {{ request.user.last_name}}{% endif %}</a>
         <a href="{% url 'user:logout' %}" class="header-link">Logout</a>
         {% else %}
         <a href="{% url 'user:login' %}" class="header-link">Login</a>

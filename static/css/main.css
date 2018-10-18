@@ -61,3 +61,8 @@ a {
 a:hover, a:focus {
     color: #2A6E96;
 }
+
+main {
+    margin: 80px auto 0;
+    width: 920px;
+}

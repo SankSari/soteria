@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if disaster is not None %}
+Search {{ disaster.name }}
+{% else %}
+Search - Soteria
+{% endif %}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/search.css" />
+{% endblock %}
+
+{% block content %}
+<div class="search-result-box">
+    {% if disaster is not None %}
+    <div class="search-heading">{{ disaster.name }}</div>
+    <div class="search-sub-block">
+        <div class="search-sub-heading">How do I know it is a/an {{ disaster.name }}?</div>
+        <div>{{ disaster.symptoms }}</div>
+    </div>
+    <div class="search-sub-block">
+        <div class="search-sub-heading">What should I do to during a/an {{ disaster.name }}?</div>
+        <div>{{ disaster.prevention }}</div>
+    </div>
+    {% else %}
+    <div class="search-heading">'{{ request.GET.q }}' gave no results</div>
+    <div class="search-sub-block">
+        <div class="search-sub-heading">You might want to try the following searches</div>
+        {% for q in err %}
+        <div><a href="{% url 'disaster:search' %}?q={{ q.name }}">{{ q.name }}</a></div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
