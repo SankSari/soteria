@@ -50,7 +50,7 @@ class RegisterView(View):
         # Break first_name and last_name
         names = data.get('name').strip().split(' ')
         first_name = names[0]
-        last_name = ""
+        last_name = ''
         if len(names) > 1:
             last_name = ' '.join(names[1:])
 

@@ -17,5 +17,16 @@ class User(AbstractUser):
     # Volunteer or not
     volunteer = models.BooleanField(verbose_name='Volunteer', default=False)
 
+    # If the user is not a volunteer, this field will be filled
+    # with the volunteer's username (incharge) of this user
+    incharge = models.CharField(
+        verbose_name='Incharge', null=True, blank=True, max_length=150)
+
+    # Latitude and longitude (location of user)
+    lat = models.CharField(
+        verbose_name='Latitude', max_length=32, blank=True, null=True)
+    lon = models.CharField(
+        verbose_name='Longitude', max_length=32, blank=True, null=True)
+
     def __str__(self):
         return self.username
