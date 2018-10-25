@@ -5,5 +5,36 @@ Dashboard - Soteria
 {% endblock %}
 
 {% block content %}
-Content here
+
+<div class="parent-container">
+	<div class="alert-container">
+	<h1>Alerts</h1>
+	{% for alert in terror %}
+	<div class="alert">
+		<p>{{ alert }}</p>
+	</div>
+	{% endfor %}
+	{% for alert in earthquakes %}
+	<div class="alert">
+		<p>{{ alert }}</p>
+	</div>
+	{% endfor %}
+	{% for alert in hurricanes %}
+	<div class="alert">
+		<p>{{ alert }}</p>
+	</div>
+	{% endfor %}
+	{% for alert in tsunami %}
+	<div class="alert">
+		<p>{{ alert }}</p>
+	</div>
+	{% endfor %}
+	</div>
+
+	<div class="action-container">
+		<h1>Get Into Action</h1>
+	</div>	
+</div>
+
+
 {% endblock %}
