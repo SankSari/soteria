@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from utils.decorators import logged_in_redirect_method
+from scripts.smsapi import smsAlerts
 from .forms import RegisterForm, LoginForm
 from .models import User
 
@@ -63,13 +64,15 @@ class RegisterView(View):
         """
         return
 
-    def register(self, username, email, phone_number, volunteer, password, first_name, last_name=""):
+    def register(self, username, email, phone_number, volunteer, password,
+                 first_name, last_name=""):
         """Puts user data into DB
         """
 
         try:
-            new_user = User(username=username, email=email, phone_number=phone_number,
-                            password=password, volunteer=volunteer, first_name=first_name,
+            new_user = User(username=username, email=email,
+                            phone_number=phone_number, password=password,
+                            volunteer=volunteer, first_name=first_name,
                             last_name=last_name)
             new_user.save()
             return None
@@ -139,4 +142,17 @@ class ProfileView(View):
 
     def get(self, request, username):
         user = get_object_or_404(User, username=username)
-        return render(request, self.template_name, {'user': user})
+        return render(request, self.template_name, {'user': user, 'success': None})
+
+    def post(self, request, username):
+        success = True
+        user = get_object_or_404(User, username=username)
+        volunteer = User.objects.get(username=request.user.incharge)
+
+        try:
+            smsAlerts(request.POST.get('message'), str(volunteer.phone_number))
+        except Exception as e:
+            print(e)
+            success = False
+
+        return render(request, self.template_name, {'user': user, 'success': success})

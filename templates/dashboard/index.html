@@ -4,37 +4,69 @@
 Dashboard - Soteria
 {% endblock %}
 
-{% block content %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/dashboard.css" />
+<link rel="stylesheet" href="/static/css/bot.css" />
+{% endblock %}
 
+{% block js_head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
 <div class="parent-container">
 	<div class="alert-container">
-	<h1>Alerts</h1>
-	{% for alert in terror %}
-	<div class="alert">
-		<p>{{ alert }}</p>
+		<div class="alerts-heading">Alerts</div>
+		{% if terror != '' %}
+		<div class="alert">
+			<div class="alert-heading">Terrorism</div>
+			<p>{{ terror }}</p>
+		</div>
+		{% endif %}
+		{% if earthquakes != '' %}
+		<div class="alert">
+			<div class="alert-heading">earthquake</div>
+			<p>{{ earthquakes }}</p>
+		</div>
+		{% endif %}
+		{% if hurricanes != '' %}
+		<div class="alert">
+			<div class="alert-heading">hurricanes</div>
+			<p>{{ hurricanes }}</p>
+		</div>
+		{% endif %}
+		{% if tsunami != '' %}
+		<div class="alert">
+			<div class="alert-heading">tsunami</div>
+			<p>{{ tsunami }}</p>
+		</div>
+		{% endif %}
 	</div>
-	{% endfor %}
-	{% for alert in earthquakes %}
-	<div class="alert">
-		<p>{{ alert }}</p>
-	</div>
-	{% endfor %}
-	{% for alert in hurricanes %}
-	<div class="alert">
-		<p>{{ alert }}</p>
-	</div>
-	{% endfor %}
-	{% for alert in tsunami %}
-	<div class="alert">
-		<p>{{ alert }}</p>
-	</div>
-	{% endfor %}
-	</div>
+	<div class="bot-container">
+		<div id="menuoptions">
+			<span id="closebutton">X</span>
+			<div id="StartChat" class="StartChat" tabindex="1">
+				<img src="https://philchallinor.co.uk/images/articles/chatbot.png" id="PersonIcon">
 
-	<div class="action-container">
-		<h1>Get Into Action</h1>
-	</div>	
+				<span id="Instruction">
+
+					Would you like some help?
+				</span>
+
+			</div>
+
+			<div id="chatwindow"></div>
+			<div id="usertextboxmessage">
+				<span>
+					<input id="UserInputBox" type="text">
+					<img src="https://philchallinor.co.uk/images/articles/send.png" class="message">
+				</span>
+			</div>
+		</div>
+	</div>
 </div>
+{% endblock %}
 
-
+{% block js_body %}
+<script type="text/javascript" src="/static/js/bot.js"></script>
 {% endblock %}
