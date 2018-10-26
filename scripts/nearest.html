@@ -1,0 +1,73 @@
+<html>
+<head>
+	<title>Find Nearest</title>
+	<style>
+		html, body, #map-canvas {
+		  height: 100%;
+		  margin: 0px;
+		  padding: 0px
+		}
+	</style>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyAcuwTIAN38WlfEwQqxYdLhLWN476BFExI"></script>
+	<script>
+		var map;
+		var infowindow;
+
+		function initialize() {
+		  var pyrmont = new google.maps.LatLng(29.8652844, 77.8927001); // sample location to start with: Mumbai, India
+
+		  map = new google.maps.Map(document.getElementById('map-canvas'), {
+		    center: pyrmont,
+		    zoom: 15
+		  });
+
+		  var request = {
+		    location: pyrmont,
+		    radius: 200,
+		    types: ['school'] // this is where you set the map to get the hospitals and health related places
+		  };
+		  infowindow = new google.maps.InfoWindow();
+		  var service = new google.maps.places.PlacesService(map);
+		  service.nearbySearch(request, callback);
+		}
+
+		function callback(results, status) {
+		  if (status == google.maps.places.PlacesServiceStatus.OK) {
+		    for (var i = 0; i < results.length; i++) {
+		    	console.log(results[i]);
+		      createMarker(results[i]);
+		    }
+		  }
+		}
+
+		function createMarker(place) {
+		  var placeLoc = place.geometry.location;
+		  console.log(placeLoc);
+		  var marker = new google.maps.Marker({
+		    map: map,
+		    position: place.geometry.location
+		  });
+
+		  google.maps.event.addListener(marker, 'click', function() {
+		    infowindow.setContent(place.name);
+		    infowindow.open(map, this);
+		  });
+		}
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+</head>	
+<body>
+	<div id="map-canvas"></div>
+</body>
+</html>	
+
+
+<!-- 
+
+using geocoding to find latitude and longitude
+then calculate the distance and directions using them 
+
+https://maps.googleapis.com/maps/api/geocode/json?address=New+LEcture+Hall+Complex,+Roorkee,+India&key=AIzaSyAcuwTIAN38WlfEwQqxYdLhLWN476BFExI
+
+ -->
