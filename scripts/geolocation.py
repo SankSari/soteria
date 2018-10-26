@@ -36,7 +36,7 @@ def getNearbyPlaces(place):
     info = {}
     count = 0
     for data in jdata['results']:
-        if count == 5:
+        if count == 1:
             break
         # print(jdata['results'][count]['geometry']['location']['lat'])
         dlat = float(jdata['results'][count]['geometry']['location']['lat'])
