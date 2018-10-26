@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 from user.models import User
 from scripts.smsapi import smsAlerts
+from scripts.geolocation import getNearbyPlaces
+from disaster.models import Disaster
 
 
 class IndexView(View):
@@ -43,16 +45,49 @@ class IndexView(View):
         Example - nearest field, school etc.
         """
 
-        # Send SMS alert to user
-        # If successful return True else False
+        name, lat, lon, dist = getNearbyPlaces(location)
+
+        message = """
+        Soteria Disaster Platform
+        Volunteer: {0}
+        Move towards following coordinates:
+        Place: {1}
+        Latitude: {2}
+        Longitude: {3}
+        """.format(members[0].incharge, name, lat, lon)
+
+        try:
+            for mem in members:
+                smsAlerts(message, str(mem.phone_number))
+        except Exception as e:
+            print(e)
+            return False
+
         return True
 
-    def safety(self, message, members):
+    def safety(self, event, members):
         """To send safety instructions for particular events
         """
 
-        # Send SMS alert to user
-        # If successful return True else False
+        try:
+            disaster = Disaster.objects.get(name=event)
+        except:
+            return False
+
+        message = """
+        Soteria Disaster Platform
+        Volunteer: {0}
+        Safety instructions for {1}:
+        {2}
+        """.format(members[0].incharge, disaster.name, disaster.prevention)
+
+        try:
+            for mem in members:
+                smsAlerts(message, str(mem.phone_number))
+        except Exception as e:
+            print(e)
+            return False
+
         return True
 
     def custom_msg(self, message, members):
@@ -63,13 +98,7 @@ class IndexView(View):
             for mem in members:
                 smsAlerts(message, str(mem.phone_number))
         except Exception as e:
-            print("------------------")
-            print("------------------")
-            print("------------------")
             print(e)
-            print("------------------")
-            print("------------------")
-            print("------------------")
             return False
 
         return True
