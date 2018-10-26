@@ -52,5 +52,3 @@ def getNearbyPlaces(place):
         placesList.append(info)
         count = count + 1
     return placesList
-
-getNearbyPlaces('hospital')
