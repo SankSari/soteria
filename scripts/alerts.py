@@ -1,7 +1,7 @@
 import requests
 import json
 import pprint
-from analyse import analyse
+from scripts.analyse import analyse
 
 def predictEvent(type, place = 'IN'):
 	url = 'https://api.predicthq.com/v1/events/?q='+type
