@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from utils.decorators import logged_in_redirect_method
 from scripts.smsapi import smsAlerts
+from scripts.geolocation import myLoc
 from .forms import RegisterForm, LoginForm
 from .models import User
 
@@ -68,12 +69,15 @@ class RegisterView(View):
                  first_name, last_name=""):
         """Puts user data into DB
         """
+        loc = myLoc()
+        lat = str(loc[0])
+        lon = str(loc[1])
 
         try:
             new_user = User(username=username, email=email,
                             phone_number=phone_number, password=password,
                             volunteer=volunteer, first_name=first_name,
-                            last_name=last_name)
+                            last_name=last_name, lat=lat, lon=lon)
             new_user.save()
             return None
         except Exception as e:
