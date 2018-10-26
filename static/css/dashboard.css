@@ -26,6 +26,14 @@
     border-bottom: 1px solid #DDD;
 }
 
+.alert p::before {
+    font-weight: bold;
+    font-size: 20px;
+    color: #777;
+    content: '*';
+    margin-right: 10px;
+}
+
 .alert-heading {
     font-size: 24px;
     font-weight: 300;
