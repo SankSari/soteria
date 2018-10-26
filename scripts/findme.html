@@ -2,8 +2,10 @@
 	<head>
 		<title>Find Me</title>
 		<script>
-			function geoFindMe() {
+			function load() {
 			  var output = document.getElementById("out");
+
+			  var latitude, longitude;
 
 			  if (!navigator.geolocation){
 			    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
@@ -17,7 +19,7 @@
 			    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
 
 			    var img = new Image();
-			    img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false&key=AIzaSyAcuwTIAN38WlfEwQqxYdLhLWN476BFExI";
+			    img.src = "https://atlas.microsoft.com/map/static/png?subscription-key=LY0GZYlXEeD9A8PFBV1yhNL0VBDhDGYl4_GfhOdpnBw&api-version=1.0&layer=basic&style=main&zoom=16&height=512&width=512&center=" + longitude + "," + latitude;
 
 			    output.appendChild(img);
 			  }
@@ -28,12 +30,18 @@
 
 			  output.innerHTML = "<p>Locating…</p>";
 			  navigator.geolocation.getCurrentPosition(success, error);
+
+			  return latitude, longitude;
+			}
+
+			window.onload = function(e) {
+				load();
 			}
 
 		</script>
 	</head>
 	<body>
-		<p><button onclick="geoFindMe()">Show my location</button></p>
+		<!-- <p><button onclick="geoFindMe()">Show my location</button></p> -->
 		<div id="out"></div>
 	</body>
 </html>

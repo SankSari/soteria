@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>Map Search</title>
+
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/css/atlas.min.css?api-version=1" type="text/css" />
+    <script src="https://atlas.microsoft.com/sdk/js/atlas.min.js?api-version=1"></script>
+    <script src="https://atlas.microsoft.com/sdk/js/atlas-service.min.js?api-version=1"></script>
+
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        #map {
+            width: 25%;
+            height: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+
+       
+
+        // Embed Map Control JavaScript code here
+        // Instantiate map to the div with id "map"
+        atlas.setSubscriptionKey("LY0GZYlXEeD9A8PFBV1yhNL0VBDhDGYl4_GfhOdpnBw");
+        var map = new atlas.Map("map");
+
+        // Initialize the pin layer for search results to the map
+        var searchLayerName = "search-results";
+
+        var client = new atlas.service.Client('LY0GZYlXEeD9A8PFBV1yhNL0VBDhDGYl4_GfhOdpnBw');
+
+        // latitude, longitude = geoFindMe();
+
+        map.events.add("load", function() {
+            // Execute a POI search query then add pins to the map for each result once a response is received
+                    // client.search.getSearchAddressReverse("37.337, -121.89")
+                    fetch('https://atlas.microsoft.com/search/address/reverse/json?subscription-key=LY0GZYlXEeD9A8PFBV1yhNL0VBDhDGYl4_GfhOdpnBw&api-version=1.0&query=37.337,-121.89')
+                    .then(response => {
+                    console.log(response)
+                    // Parse the response into GeoJSON 
+                    var geojsonResponse = new atlas.service.geojson.GeoJsonSearchResponse(response);
+
+                    // Create the point features that will be added to the map as pins
+                    var searchPins = geojsonResponse.getGeoJsonResults().features.map(poiResult => {
+                       var poiPosition = [poiResult.properties.position.lon, poiResult.properties.position.lat];
+                       return new atlas.data.Feature(new atlas.data.Point(poiPosition), {
+                        name: poiResult.properties.poi.name,
+                        address: poiResult.properties.address.freeformAddress,
+                        position: poiPosition[1] + ", " + poiPosition[0]
+                       });
+                    });
+
+                    // Add pins to the map for each POI
+                    map.addPins(searchPins, {
+                       name: searchLayerName,
+                       cluster: false, 
+                       icon: "pin-round-darkblue" 
+                    });
+
+                    // Set the camera bounds
+                    map.setCameraBounds({
+                       bounds: geojsonResponse.getGeoJsonResults().bbox,
+                       padding: 50
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>
