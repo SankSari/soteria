@@ -23,22 +23,28 @@ Dashboard - Soteria
 			<p>{{ terror }}</p>
 		</div>
 		{% endif %}
-		{% if earthquakes != '' %}
+		{% if earthquakes %}
 		<div class="alert">
 			<div class="alert-heading">earthquake</div>
-			<p>{{ earthquakes }}</p>
+			{% for item in earthquakes %}
+			<p>{{ item }}</p>
+			{% endfor %}
 		</div>
 		{% endif %}
-		{% if hurricanes != '' %}
+		{% if hurricanes %}
 		<div class="alert">
 			<div class="alert-heading">hurricanes</div>
-			<p>{{ hurricanes }}</p>
+			{% for item in hurricanes %}
+			<p>{{ item }}</p>
+			{% endfor %}
 		</div>
 		{% endif %}
-		{% if tsunami != '' %}
+		{% if tsunami %}
 		<div class="alert">
 			<div class="alert-heading">tsunami</div>
-			<p>{{ tsunami }}</p>
+			{% for item in tsunami %}
+			<p>{{ item }}</p>
+			{% endfor %}
 		</div>
 		{% endif %}
 	</div>

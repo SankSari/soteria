@@ -14,12 +14,12 @@ class IndexView(View):
         terrorAlerts = predictEvent('terrorist')[1]
 
         # Get earthquake alerts
-        earthquakes = predictCalamity('earthquake')[1]
+        earthquakes = predictCalamity('earthquake')[0][:3]
 
         # Get hurricane alerts
-        hurricanes = predictCalamity('hurricanes')[1]
+        hurricanes = predictCalamity('hurricanes')[0][:3]
 
         # Get tsunami alerts
-        tsunami = predictCalamity('tsunami')[1]
+        tsunami = predictCalamity('tsunami')[0][:3]
 
         return render(request, self.template_name, {'terror': terrorAlerts, 'earthquakes': earthquakes, 'hurricanes': hurricanes, 'tsunami': tsunami})
