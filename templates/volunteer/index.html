@@ -1,9 +1,61 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/css/volunteer.css" />
+{% endblock %}
+
 {% block content %}
-<ul>
-    {% for member in members %}
-    <li>{{ member }}</li>
-    {% endfor %}
-</ul>
+<div class="volunteer-container">
+    <div class="members-box">
+        <div class="members-heading">members</div>
+        <ol>
+            {% for member in members %}
+            <li><a href="{% url 'user:profile' member.username %}">{{ member.first_name }} {{ member.last_name }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="alert-box">
+        <div class="alert-heading">Alert members</div>
+        {% if success is not None %}
+        {% if success %}
+        Message sent!
+        {% else %}
+        Message couldn't be sent.
+        {% endif %}
+        {% endif %}
+        <div class="alert-acc">
+            <div class="alert-acc-heading">Broadcast safe location</div>
+            <div class="alert-acc-content">
+                <form method="POST" action="{% url 'volunteer:index' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="msg" value="go_here" />
+                    <input type="text" placeholder="Nearest 'field', etc." name="location" />
+                </form>
+                <div class="press-enter"></div>
+            </div>
+        </div>
+        <div class="alert-acc">
+            <div class="alert-acc-heading">Broadcast safety instructions</div>
+            <div class="alert-acc-content">
+                <form method="POST" action="{% url 'volunteer:index' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="msg" value="safety" />
+                    <input type="text" placeholder="'Earthquake', 'Tsunami', etc." name="event" />
+                </form>
+                <div class="press-enter"></div>
+            </div>
+        </div>
+        <div class="alert-acc">
+            <div class="alert-acc-heading">Customized message</div>
+            <div class="alert-acc-content">
+                <form method="POST" action="{% url 'volunteer:index' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="msg" value="custom_msg" />
+                    <textarea placeholder="Nearest 'field', etc." name="message"></textarea>
+                    <button type="submit" class="send-button">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

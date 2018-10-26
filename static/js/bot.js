@@ -1,10 +1,10 @@
 $(document).ready(function(){
-	window.globalVar = 1;	
-	
+	window.globalVar = 1;
+
 	//create initial layout
-	
-	
-	
+
+
+
 	var supra;
 	var ProcessContainer = {
 			ProcessUserMessage: function (e,texttoinput) {
@@ -12,7 +12,7 @@ $(document).ready(function(){
 			$('.class123').hide();
 
 			setTimeout(function () {
-				$("#chatwindow").append("<div id='dotdotdot'><span id='StuLife" + window.globalVar + "' class='options class123' style='float:left;margin-right: 40px; background-color:#77DD77' onclick='test.myFunction(event,this)'><span class='dotA'></span> <span class='dotB'></span> <span class='dotC'></span> </span></div><div style='clear: both'></div>");		
+				$("#chatwindow").append("<div id='dotdotdot'><span id='StuLife" + window.globalVar + "' class='options class123' style='float:left;margin-right: 0px; background-color:#77DD77' onclick='test.myFunction(event,this)'><span class='dotA'></span> <span class='dotB'></span> <span class='dotC'></span> </span></div><div style='clear: both'></div>");
 			}, 700);
 
 			setTimeout(function () {
@@ -29,7 +29,7 @@ $(document).ready(function(){
 					})
 				.then(r => r.json())
 				.then(data => { ans=data["answers"][0]['answer'];BotMessageContainer.BotMessage(ans);});
-				
+
 				$('#chatwindow').scrollTop($('#chatwindow')[0].scrollHeight);
 			}, 2000);
 		}
@@ -46,7 +46,7 @@ $(document).ready(function(){
 
 	var BotMessageContainer = {
 		BotMessage: function (replymessage) {
-			$("#chatwindow").append("<div style='width: 80%; max-width: 80px;'><span id='StuLife"+ window.globalVar + "' class='options' style='float:left;margin-right: 40px;background-color:#77DD77' onclick='test.myFunction(event,this)'>" + replymessage + "</span></div><div style='clear: both'></div>");
+			$("#chatwindow").append("<div style='width: 80%;'><span id='StuLife"+ window.globalVar + "' class='options' style='float:left;margin-right: 0px;background-color:#77DD77' onclick='test.myFunction(event,this)'>" + replymessage + "</span></div><div style='clear: both'></div>");
 			}
 		}
 
@@ -55,7 +55,7 @@ $(document).ready(function(){
 		$("#chatwindow").append("<a href='" + link + "'><div><span id='StuLife"+ window.globalVar + "' class='options' style='float:left;background-color:#77DD77' onclick='test.myFunction(event,this)'>" + text1 + "</span></div><div style='clear: both'></div></a>");
 		}
 	}
-	
+
 	$("#UserInputBox").keypress(function(e) {
 		if(e.which == 13) {
 			supra = $("#UserInputBox").val()
@@ -67,22 +67,22 @@ $(document).ready(function(){
 	$(".message").click(function(e){
 		UserMessageContainer.UserMessage(e,$("#UserInputBox").val());
 	});
-  
+
   $("#closebutton").click(function(e){
 		 $("#menuoptions").toggle();
 	});
-  
-  
-   
+
+
+
     function chatting(){
 		$("#UserInputBox").val("");
         $("#menuoptions").animate({right: '0'}).animate({top: '0%'},{ queue: false, duration: 1000 }).animate({height: '100%'},{ queue: false, duration: 200 });
       $('#closebutton').fadeOut({ queue: false, duration: 200 });
-      
+
 
 		$('#Instruction').text('How can I help you?');
 		BotMessageContainer.BotMessage('Hello');
-		
+
 		$('#usertextboxmessage').fadeIn(1000);
 		$('#chatwindow').fadeIn(1000);
 		$('#UserInputBox').focus();

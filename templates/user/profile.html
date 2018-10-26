@@ -1,1 +1,65 @@
-PROFILE {{ user.email }}
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/profile.css" />
+{% endblock %}
+
+{% block content %}
+<div class="parent-container">
+    <div class="profile-container">
+        <div class="profile-heading">profile</div>
+        <table>
+            <tr>
+                <td>Username</td>
+                <td>{{ request.user.username }}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Email Address</td>
+                <td>{{ request.user.email }}</td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td>+91{{ request.user.phone_number }}</td>
+            </tr>
+            {% if request.user.volunteer %}
+            <tr>
+                <td>Volunteer</td>
+                <td>{{ request.user.volunteer }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>Volunteer Incharge</td>
+                <td>{{ request.user.incharge }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>Latitude / Longitude</td>
+                <td>{{ request.user.lat }} / {{ request.user.lon }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="actions-container">
+        {% if not request.user.volunteer %}
+        <div class="send-msg-volunteer">
+            <div class="send-msg-heading">Send message to volunteer</div>
+            {% if success is not None %}
+            {% if success %}
+            Message sent!
+            {% else %}
+            Message couldn't be sent.
+            {% endif %}
+            {% endif %}
+            <form action="{% url 'user:profile' request.user.username %}" method="POST">
+                {% csrf_token %}
+                <textarea name="message"></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

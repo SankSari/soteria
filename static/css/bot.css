@@ -1,4 +1,4 @@
-    
+
  /* The animation code */
 @keyframes example1 {
     0% {
@@ -89,7 +89,7 @@
 
 #UserInputBox
 {
-    width: 70%;
+    width: 85%;
     -webkit-border-radius: 40px;
     outline: none;
     border: 0px solid #000000;
@@ -148,9 +148,9 @@
 }
 
 /** Start chat icon **/
-.StartChat {    
+.StartChat {
 
-    z-index: 10001;
+    z-index: 1;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -175,15 +175,15 @@
 }
 
 #FullRightScreen{
-    
+
 }
 
 #closebutton{
-  position:fixed; 
-  background-color:yellow; 
-  right:0; z-index:99999999; 
-  margin:5px; 
- 
+  position:fixed;
+  background-color:yellow;
+  right:0; z-index:1;
+  margin:5px;
+
   padding:10px;
     -webkit-border-radius: 40px;
     -moz-border-radius: 140px;
@@ -202,7 +202,7 @@
 }
 
 .hiddendiv{
-    z-index: 999;
+    z-index: 1;
     position: fixed;
     visibility: hidden;
     height:100vh;
@@ -213,24 +213,22 @@
 #menuoptions
 {
     background:#292929;
-    position:fixed;
-    right:0;
-    width: 350px;
-    z-index: 10000;
+    position: relative;
+    width: 100%;
     bottom: 0%;
+    height: 100%;
 
 }
-    
+
     @media screen and (max-width: 479px) {
-        
+
         #menuoptions
-        {   
+        {
          width:100%;
         }
-        
-        #PersonIcon {   
+
+        #PersonIcon {
         max-height:60px;
         max-width:60px;
         }
     }
-

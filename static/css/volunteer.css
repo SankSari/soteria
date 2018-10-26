@@ -1,0 +1,88 @@
+.volunteer-container {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.members-box {
+    background: #FFF;
+    border: 1px solid #777;
+    width: 45%;
+    padding: 50px;
+}
+
+.members-heading {
+    font-size: 56px;
+    font-weight: 300;
+    color: #000;
+}
+
+.members-box ol {
+    margin: 20px 0 0 20px;
+}
+
+.alert-box {
+    width: 45%;
+}
+
+.alert-heading {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.alert-acc {
+    width: 100%;
+    cursor: pointer;
+    background: #FFF;
+    box-shadow: 0 1px 1px #555;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.alert-acc-heading {
+    font-weight: bold;
+}
+
+.alert-acc-heading::before {
+    font-size: 20px;
+    font-weight: bold;
+    color: #999;
+    content: '+';
+    margin-right: 20px;
+}
+
+
+.alert-acc-content {
+    padding-top: 20px;
+}
+
+.alert-acc-content input[type='text'], .alert-acc-content textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+}
+
+.alert-acc-content textarea {
+    height: 100px;
+    resize: none;
+}
+
+.press-enter {
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.press-enter::after {
+    content: 'Press enter to send message';
+}
+
+.send-button {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 16px;
+}

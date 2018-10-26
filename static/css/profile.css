@@ -1,0 +1,71 @@
+.parent-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.profile-container {
+    width: 45%;
+    padding: 50px;
+    border: 1px solid #777;
+    background: #FFF;
+}
+
+.profile-heading {
+    font-size: 56px;
+    font-weight: 300;
+    color: #000;
+    text-transform: lowercase;
+}
+
+.profile-container table {
+    border: none;
+    margin-top: 20px;
+}
+
+.profile-container tr {
+    display: block;
+    border-bottom: 1px solid #DDD;
+}
+
+.profile-container td:first-child {
+    display: inline-block;
+    padding-right: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.actions-container {
+    width: 45%;
+}
+
+.send-msg-volunteer {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 1px 1px #777;
+    background: #FFF;
+}
+
+.send-msg-heading {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+.send-msg-volunteer textarea {
+    padding: 10px 12px;
+    height: 150px;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 16px;
+    resize: none;
+}
+
+.send-msg-volunteer button {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+
+}
